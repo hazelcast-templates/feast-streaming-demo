@@ -2,15 +2,13 @@
 
 ## Starting the Project
 
-You can run start the project running:
+You can start the project by running:
 
     docker-compose up
 
 After the project starts, visit the Jupyter Notebook URL in your web browser:
 
     http://127.0.0.1:8888/lab/tree/StreamingFeatures.ipynb
-
-And open the `StreamingFeatures` notebook.
 
 ## Stopping the Project
 

@@ -1,7 +1,7 @@
 note: |
   Feast streaming features project with Hazelcast online store was created successfully.
   
-  You can run start the project running:
+  You can start the project by running:
   
     docker-compose up
   
