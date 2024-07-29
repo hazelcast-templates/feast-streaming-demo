@@ -1,0 +1,47 @@
+version: "3.0"
+
+services:
+
+  postgresql:
+    image: "docker.io/postgres:16"
+    environment:
+       POSTGRES_DB: "demo"
+       POSTGRES_USER: "demo"
+       POSTGRES_PASSWORD: "demo"
+    volumes:
+      - "./etc/init.sql:/docker-entrypoint-initdb.d/init.sql"
+
+  hazelcast:
+    image: "docker.io/hazelcast/hazelcast:5.4.0"
+
+  kafka:
+    image: "docker.io/apache/kafka:3.7.0"
+    hostname: kafka
+    container_name: kafka
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT_HOST://localhost:9092,PLAINTEXT://kafka:19092"
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:29093"
+      KAFKA_LISTENERS: "CONTROLLER://:29093,PLAINTEXT_HOST://0.0.0.0:9092,PLAINTEXT://0.0.0.0:19092"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
+      KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
+      CLUSTER_ID: "c94cf7dd-e74a-4048-a532-7cf9dd80dbba"
+      KAFKA_LOG_DIRS: "/tmp/kraft-combined-logs"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "1"
+      KAFKA_LOG_RETENTION_MS: 60000
+      KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 5000
+
+  demo:
+    build:
+      context: "."
+      dockerfile: "demo.Dockerfile"
+    ports:
+      - "8888:8888"
+    depends_on:
+      - "hazelcast"
+      - "postgresql"
+
+

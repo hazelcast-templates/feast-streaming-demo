@@ -1,0 +1,15 @@
+project: feast_streaming
+
+registry: /home/sam/feast/data/registry.db
+
+provider: local
+
+online_store:
+    type: hazelcast
+    cluster_name: dev
+    cluster_members: ["hazelcast:5701"]
+
+offline_store:
+  type: file
+
+entity_key_serialization_version: 2

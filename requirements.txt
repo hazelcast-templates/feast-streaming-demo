@@ -1,0 +1,6 @@
+jupyterlab==4.2.3
+pandas==2.2.2
+feast[hazelcast]
+feast[postgres]
+confluent-kafka==2.4.0
+git+https://github.com/hazelcast/hazelcast-python-client@master#egg=hazelcast-python-client

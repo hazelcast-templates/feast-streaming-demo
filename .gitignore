@@ -1,0 +1,7 @@
+.idea
+.venv
+
+*.jar
+*.pyc
+
+.ipynb_checkpoints/

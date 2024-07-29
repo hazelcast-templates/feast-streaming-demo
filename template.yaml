@@ -1,0 +1,10 @@
+note: |
+  Feast streaming features project with Hazelcast online store was created successfully.
+  
+  You can run start the project running:
+  
+    docker-compose up
+  
+  After the project starts, visit the Jupyter Notebook URL in your web browser:
+  
+    http://127.0.0.1:8888/lab/tree/StreamingFeatures.ipynb
